@@ -78,7 +78,7 @@ function game() {
     console.log(`[Score] Player: ${playerScore} | Computer: ${computerScore}`);
   }
 
-  console.log("------------------------");
+  console.log(" ");
   if (playerScore > computerScore)
     console.log("You win this game! Good job!");
   else if (playerScore < computerScore)
