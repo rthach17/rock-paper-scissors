@@ -59,7 +59,7 @@ function getWinner(playerSelection, computerSelection) {
 
 function game() {
   console.clear();
-  console.log("Game Start!");
+  console.log("Welcome to RPS! Five Rounds! Game Start!");
 
   let playerScore = 0;
   let computerScore = 0;
