@@ -57,6 +57,7 @@ function getWinner(playerSelection, computerSelection) {
   }
 }
 
+// game function goes here
 function game() {
   console.clear();
   console.log("Welcome to RPS! Five Rounds! Game Start!");
