@@ -31,17 +31,19 @@ function getRoundWinner(playerChoice) {
 
   switch (playerChoice) {
     case "rock":
-      if (computerChoice === "scissors")
-        return "Player";
+      if (computerChoice === "scissors") return "Player";
+      break;
     case "paper":
-      if (computerChoice === "rock")
-        return "Player";
+      if (computerChoice === "rock") return "Player";
+      break;
     case "scissors":
-      if (computerChoice === "paper")
-        return "Player";
+      if (computerChoice === "paper") return "Player";
+      break;
     default:
-      return "Computer";
+      console.log(playerChoice);
   }
+
+  return "Computer"
 }
 
 function getRoundResult(winner) {
