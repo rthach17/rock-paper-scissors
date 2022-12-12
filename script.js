@@ -24,45 +24,56 @@ function getPlayerChoice(choice) {
   }
 }
 
-function playRound(playerSelection, computerSelection) {
-  console.log(`Player chose ${playerSelection}`);
-  console.log(`Computer chose ${computerSelection}`);
-
-  let winner = getWinner(playerSelection, computerSelection);
-  if (winner === "")
-    console.log("It's a tie!");
-  else
-    console.log(`${winner} wins this round!`);
-
-  return winner;
-}
-
-function getWinner(playerSelection, computerSelection) {
-  if (playerSelection === computerSelection)
+function getRoundWinner(playerChoice) {
+  let computerChoice = getComputerChoice();
+  if (playerChoice === computerChoice)
     return "";
 
-  switch (playerSelection) {
+  switch (playerChoice) {
     case "rock":
-      if (computerSelection === "scissors")
+      if (computerChoice === "scissors")
         return "Player";
     case "paper":
-      if (computerSelection === "rock")
+      if (computerChoice === "rock")
         return "Player";
     case "scissors":
-      if (computerSelection === "paper")
+      if (computerChoice === "paper")
         return "Player";
     default:
       return "Computer";
   }
 }
 
+function getRoundResult(winner) {
+  return (winner === "") ? "It's a tie!" : `${winner} wins this round!`;
+}
+
 // game function goes here
 function game() {
-  
-
   let playerScore = 0;
   let computerScore = 0;
-  let winner = "";
+  let winnerMessage = "";
+
+  // Result display values
+  let resultPlayer = document.querySelector('.player');
+  let resultComputer = document.querySelector('.computer');
+  let resultWinner = document.querySelector('.winner');
+
+  // Play each round by picking a button
+  const buttons = document.querySelectorAll('button');
+  buttons.forEach(button => button.addEventListener('click', (event) => {
+    let roundWinner = getRoundWinner(getPlayerChoice(button.textContent));
+    let roundMessage = getRoundResult(roundWinner);
+
+    // Update results at end of each round
+    if (roundWinner === "Player") playerScore++
+    if (roundWinner === "Computer") computerScore++;
+    resultPlayer.textContent = `Player: ${playerScore}`;
+    resultComputer.textContent = `Computer: ${computerScore}`;
+    resultWinner.textContent = roundMessage;
+  }));
+
+  
 
   /* Prompts user to play again
   let playAgainChoice = prompt("Play again? [Y] or [N]", "n");
@@ -73,11 +84,5 @@ function game() {
     console.log("Thanks for playing!");
   */
 }
-
-// Add event listeners for player choice buttons
-const buttons = document.querySelectorAll('button');
-buttons.forEach(button => button.addEventListener('click', (event) => {
-  playRound(getPlayerChoice(button.textContent), getComputerChoice());
-}));
 
 game();
