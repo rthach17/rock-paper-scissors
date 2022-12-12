@@ -81,6 +81,4 @@ buttons.forEach(button => button.addEventListener('click', (event) => {
   playRound(getPlayerChoice(button.textContent), getComputerChoice());
 }));
 
-const results = document.createElement('div');
-
 game();
