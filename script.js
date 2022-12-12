@@ -51,15 +51,15 @@ function getRoundResult(winner) {
 }
 
 function promptPlayAgain() {
-  let gameButtons = document.querySelector('div.buttons');
+  let results = document.querySelector('div.results');
   let restartButton = document.createElement('button');
   restartButton.innerText = "Play Again";
 
   restartButton.addEventListener('click', () => {
     game();
-    gameButtons.removeChild(restartButton);
+    results.removeChild(restartButton);
   });
-  gameButtons.appendChild(restartButton);
+  results.appendChild(restartButton);
 }
 
 // game function goes here
