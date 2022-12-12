@@ -52,28 +52,37 @@ function getRoundResult(winner) {
 function game() {
   let playerScore = 0;
   let computerScore = 0;
-  let winnerMessage = "";
 
   // Result display values
-  let resultPlayer = document.querySelector('.player');
+  let resultPlayer = document.querySelector('.player.results');
   let resultComputer = document.querySelector('.computer');
   let resultWinner = document.querySelector('.winner');
 
   // Play each round by picking a button
-  const buttons = document.querySelectorAll('button');
-  buttons.forEach(button => button.addEventListener('click', (event) => {
-    let roundWinner = getRoundWinner(getPlayerChoice(button.textContent));
-    let roundMessage = getRoundResult(roundWinner);
+  let playRound = function() {
+    let roundWinner = getRoundWinner(getPlayerChoice(this.textContent));
 
-    // Update results at end of each round
     if (roundWinner === "Player") playerScore++
     if (roundWinner === "Computer") computerScore++;
     resultPlayer.textContent = `Player: ${playerScore}`;
     resultComputer.textContent = `Computer: ${computerScore}`;
-    resultWinner.textContent = roundMessage;
-  }));
 
-  
+    let resultMessage = "";
+    if (playerScore >= 5 || computerScore >= 5) {
+      let gameButtons = document.querySelector('div.buttons');
+      buttons.forEach(button => gameButtons.removeChild(button));
+      resultMessage = (roundWinner === "Player")
+                     ? "YOU WIN THIS GAME! Great job!"
+                     : "The COMPUTER wins. Better luck next time!";
+    } else {
+      resultMessage = getRoundResult(roundWinner);
+    }
+    resultWinner.textContent = resultMessage;
+  }
+
+  // Create game buttons
+  const buttons = document.querySelectorAll('button');
+  buttons.forEach(button => button.addEventListener('click', playRound));
 
   /* Prompts user to play again
   let playAgainChoice = prompt("Play again? [Y] or [N]", "n");
