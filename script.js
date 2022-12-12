@@ -48,6 +48,18 @@ function getRoundResult(winner) {
   return (winner === "") ? "It's a tie!" : `${winner} wins this round!`;
 }
 
+function promptPlayAgain() {
+  let gameButtons = document.querySelector('div.buttons');
+  let restartButton = document.createElement('button');
+  restartButton.innerText = "Play Again";
+
+  restartButton.addEventListener('click', () => {
+    game();
+    gameButtons.removeChild(restartButton);
+  });
+  gameButtons.appendChild(restartButton);
+}
+
 // game function goes here
 function game() {
   let playerScore = 0;
@@ -57,6 +69,9 @@ function game() {
   let resultPlayer = document.querySelector('.player.results');
   let resultComputer = document.querySelector('.computer');
   let resultWinner = document.querySelector('.winner');
+  resultPlayer.textContent = `Player: ${playerScore}`;
+  resultComputer.textContent = `Computer: ${computerScore}`;
+  resultWinner.textContent = "Pick a choice!";
 
   // Play each round by picking a button
   let playRound = function() {
@@ -67,31 +82,21 @@ function game() {
     resultPlayer.textContent = `Player: ${playerScore}`;
     resultComputer.textContent = `Computer: ${computerScore}`;
 
-    let resultMessage = "";
     if (playerScore >= 5 || computerScore >= 5) {
-      let gameButtons = document.querySelector('div.buttons');
-      buttons.forEach(button => gameButtons.removeChild(button));
-      resultMessage = (roundWinner === "Player")
+      let divButtons = document.querySelector('div.buttons');
+      buttons.forEach(button => button.removeEventListener('click', playRound))
+      resultWinner.textContent = (roundWinner === "Player")
                      ? "YOU WIN THIS GAME! Great job!"
                      : "The COMPUTER wins. Better luck next time!";
+      promptPlayAgain();
     } else {
-      resultMessage = getRoundResult(roundWinner);
+      resultWinner.textContent = getRoundResult(roundWinner);
     }
-    resultWinner.textContent = resultMessage;
   }
 
   // Create game buttons
   const buttons = document.querySelectorAll('button');
   buttons.forEach(button => button.addEventListener('click', playRound));
-
-  /* Prompts user to play again
-  let playAgainChoice = prompt("Play again? [Y] or [N]", "n");
-  playAgainChoice = playAgainChoice.substr(0, 1).toLowerCase();
-  if (playAgainChoice === "y")
-    game();
-  else
-    console.log("Thanks for playing!");
-  */
 }
 
 game();
