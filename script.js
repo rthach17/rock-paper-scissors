@@ -66,35 +66,14 @@ function game() {
   let computerScore = 0;
   let winner = "";
 
-  // 5 rounds between player and computer
-  for (let i = 1; i <= 5; i++) {
-    console.log(`----Round ${i}----`);
-
-    let winner = playRound(getPlayerChoice(), getComputerChoice());
-    if (winner === "Player")
-      playerScore++;
-    else if (winner === "Computer")
-      computerScore++;
-
-    console.log(`[Score] Player: ${playerScore} | Computer: ${computerScore}`);
-  }
-
-  console.log(" ");
-  if (playerScore > computerScore)
-    console.log("You win this game! Good job!");
-  else if (playerScore < computerScore)
-    console.log("The Computer wins the game! Better luck next time!");
-  else {
-    console.log("It's a stalemate! What a close battle!")
-  }
-
-  // Prompts user to play again
+  /* Prompts user to play again
   let playAgainChoice = prompt("Play again? [Y] or [N]", "n");
   playAgainChoice = playAgainChoice.substr(0, 1).toLowerCase();
   if (playAgainChoice === "y")
     game();
   else
-    console.log("Thanks for playing!")
+    console.log("Thanks for playing!");
+  */
 }
 
 game();
