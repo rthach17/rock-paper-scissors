@@ -10,8 +10,7 @@ function getComputerChoice() {
   }
 }
 
-function getPlayerChoice() {
-  let choice = prompt("Rock, Paper, or Scissors?", "Rock");
+function getPlayerChoice(choice) {
   choice = choice.toLowerCase();
 
   switch (choice) {
@@ -78,7 +77,7 @@ function game() {
 
 let buttons = document.querySelectorAll('button');
 buttons.forEach(button => button.addEventListener('click', (event) => {
-  console.log(button.textContent);
+  console.log(getPlayerChoice(button.textContent));
 }));
 
 
